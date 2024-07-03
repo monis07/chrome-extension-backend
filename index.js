@@ -6,8 +6,9 @@ import adminRouter from './admin.js'
 
 const port =3000
 const app=express();
-app.use(express.json());
-app.use(bodyparser.json())
+app.use(express.json({limit: '200mb'}));
+app.use(bodyparser.text({ limit: '200mb' }));
+app.use(bodyparser.urlencoded({ limit: '200mb', extended: true }));
 
 app.use(cors()); 
 app.use('/admin',adminRouter)
