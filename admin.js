@@ -6,9 +6,11 @@ const genAI = new GoogleGenerativeAI('process.env.GOOGLE_API_KEY');
 
 router.post('/execute',async (req,res)=>{
     const img = req.body.img;
+    const prompt = req.body.prompt;
+    console.log(req.body.prompt)
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
     const result = await model.generateContent([
-"Extract text from this photo",
+prompt,
 {inlineData: {data: img,
 mimeType: 'image/png'}}]
 );
